@@ -5,6 +5,9 @@ import "./styles/header.scss";
 import Home from "./components/Home";
 import "./styles/home.scss";
 import Footer from "./components/Footer";
+import "./styles/footer.scss"
+import Contact from "./components/Contact";
+import "./styles/contact.scss";
 
 function App() {
   return (
@@ -12,6 +15,7 @@ function App() {
      <Header />
     <Routes>
     <Route path="/" element = {<Home />} />
+    <Route path="/contact" element={<Contact />} />
     </Routes>
     <Footer />
    </Router>
