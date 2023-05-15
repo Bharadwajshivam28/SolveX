@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import "./styles/footer.scss"
 import Contact from "./components/Contact";
 import "./styles/contact.scss";
+import Services from "./components/Services";
+import "./styles/mediaquery.scss";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
     <Routes>
     <Route path="/" element = {<Home />} />
     <Route path="/contact" element={<Contact />} />
+    <Route path="/services" element={<Services />} />
     </Routes>
     <Footer />
    </Router>

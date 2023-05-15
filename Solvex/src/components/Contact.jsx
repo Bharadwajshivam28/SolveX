@@ -3,7 +3,7 @@ import React from 'react'
 const Contact = () => {
   return (
     <div className="contact">
-      <nain>
+      <main>
         <h1>Contact Us</h1>
 
         <form>
@@ -22,7 +22,7 @@ const Contact = () => {
 
             <button type="submit">Send</button>
         </form>
-      </nain>
+      </main>
     </div>
   )
 }
