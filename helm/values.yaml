@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: shivamkumar28dec/solvex
+  pullPolicy: IfNotPresent
+  tag: "latest"
+  port: 80
+  targetPort: 3000
+  type: LoadBalancer
+  containerPort: 3000
