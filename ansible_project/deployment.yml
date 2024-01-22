@@ -1,0 +1,44 @@
+---
+- name: Deploying Application
+  hosts: localhost
+  ignore_errors: yes
+  become: yes
+  tasks:
+    - name: Clone latest code from GitHub Repository of the Application
+      git:
+        repo: https://github.com/Bharadwajshivam28/SolveX.git
+        dest: /website
+        update: yes
+
+    - name: Install node and npm
+      apt:
+        name: [nodejs, npm]
+        state: present
+
+    - name: Installing project dependencies
+      command: npm install
+      args:
+         chdir: /website
+
+
+- name: Deploying Application on another VM and running it
+  hosts: targeted_vm
+  become: yes
+  tasks:
+    - name: Copy the built Application to another VM
+      synchronize:
+         src: /website/
+         dest: /website/
+
+    - name: Install node and npm
+      apt:
+        name: [nodejs, npm]
+        state: present
+        update_cache: yes
+
+    - name: Start the Application onanother VM
+      command: npm start
+      args:
+        chdir: /website
+      register: npm_start_result
+      failed_when: "npm_start_result.rc != 0"
