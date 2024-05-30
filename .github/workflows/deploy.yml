@@ -23,4 +23,4 @@ jobs:
           workload_identity_provider: ${{ secrets.WIP }}
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
           access_token_lifetime: 300s
-          project_id: "Your_Project_ID"
+          project_id: "virtual-voyage-423511-d7"
