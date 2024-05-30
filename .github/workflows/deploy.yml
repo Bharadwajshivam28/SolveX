@@ -1,4 +1,4 @@
-name: Building Docker Image and deploying to DockerHub
+name: Deploy to Google Cloud
 
 on:
   push:
@@ -6,17 +6,21 @@ on:
       - main
 
 jobs:
-  build:
+  copy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Login to DockerHub
-      run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
-
-    - name: Building and Pushing Docker Image to DockerHub
-      run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/solvex:latest .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/solvex:latest
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.WIP }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          access_token_lifetime: 300s
+          project_id: "Your_Project_ID"
